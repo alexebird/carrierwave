@@ -57,6 +57,9 @@ elsif defined?(Rails)
 elsif defined?(Sinatra)
   if defined?(Padrino) && defined?(PADRINO_ROOT)
     CarrierWave.root = File.join(PADRINO_ROOT, "public")
+    Padrino.before_load do
+      I18n.load_path << File.join(File.dirname(__FILE__), "carrierwave", "locale", 'en.yml')
+    end
   else
 
     CarrierWave.root = if Sinatra::Application.respond_to?(:public_folder)
